@@ -1,0 +1,74 @@
+body {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}
+
+/* Логотип */
+.logo {
+    font-family: var(--font-logo);
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--color-accent);
+    text-shadow: var(--shadow-accent);
+}
+
+/* Кнопки */
+.button {
+    background-color: var(--color-accent);
+    color: var(--color-bg-dark);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.button:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Карточки */
+.card {
+    background-color: var(--color-bg-medium);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+}
+
+/* Акцентные элементы */
+.accent-text {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+/* Навигация */
+.nav-link {
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-accent);
+}
+
+/* Формы */
+.input {
+    background-color: var(--color-bg-medium);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--color-text);
+    padding: 12px;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: var(--color-accent);
+    outline: none;
+    box-shadow: var(--shadow-accent);
+}

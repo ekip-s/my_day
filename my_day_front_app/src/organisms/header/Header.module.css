@@ -1,0 +1,20 @@
+.header {
+    background-color: var(--color-header);
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: var(--indentation);
+    margin-right: var(--indentation);
+}
+
+.logo {
+    font-family: var(--font-logo), sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    text-shadow: var(--shadow-accent);
+    padding: 2px;
+}
