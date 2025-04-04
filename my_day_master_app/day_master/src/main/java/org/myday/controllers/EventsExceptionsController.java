@@ -1,14 +1,14 @@
 package org.myday.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.myday.services.event_exceptions.EventsExceptionsService;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Slf4j
@@ -18,20 +18,29 @@ import java.util.UUID;
 @Tag(name="EventsExceptions", description = "Управление исключениями событий")
 public class EventsExceptionsController {
 
-    //создание исключения;
+    private final EventsExceptionsService eventsExceptionsService;
+
     @Operation(
             summary = "Добавить исключение для рекурентного события"
     )
-    @PostMapping
-    public void addEventException() {
-
+    @PostMapping("/{eventId}")
+    public void addEventException(
+            @PathVariable @Parameter(description = "id события", required = true) UUID eventId,
+            @RequestParam @Parameter(description = "Дата/время исключения?", required = true) Instant exceptionTime
+    ) {
+        log.info("POST: EventsExceptionsController addEventException, eventId: {}, exceptionTime: {}",
+                eventId, exceptionTime);
+        eventsExceptionsService.addEventException(eventId, exceptionTime);
     }
 
     @Operation(
             summary = "Удаление исключения по id"
     )
-    @DeleteMapping
-    public void deleteEventExceptionById(UUID exceptionId) {
-
+    @DeleteMapping("/{exceptionId}")
+    public void deleteEventExceptionById(
+            @PathVariable @Parameter(description = "id события", required = true) UUID exceptionId) {
+        log.info("DELETE: EventsExceptionsController deleteEventExceptionById, exceptionId: {}",
+                exceptionId);
+        eventsExceptionsService.deleteEventExceptionById(exceptionId);
     }
 }
