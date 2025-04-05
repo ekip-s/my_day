@@ -60,6 +60,8 @@ public class SingleEventsServiceImpl implements SingleEventsService {
     @Override
     @Transactional
     public OutgoingSingleEvent updateSingleEvents(UUID eventId, IncomingSingleEvent incomingEvent) {
+        ownerValidation(eventId);
+
         SingleEvent singleEvent = singleEventMapper.toEvent(incomingEvent);
         singleEvent.setId(eventId);
         singleEvent.setUserId(getUserId());
@@ -69,6 +71,7 @@ public class SingleEventsServiceImpl implements SingleEventsService {
     @Override
     @Transactional
     public void deleteSingleEventById(UUID eventId) {
+        ownerValidation(eventId);
         singleEventsRepository.deleteById(eventId);
     }
 
@@ -79,5 +82,15 @@ public class SingleEventsServiceImpl implements SingleEventsService {
     private UUID getUserId() {
         Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return UUID.fromString(jwt.getClaimAsString("sub"));
+    }
+
+    private void ownerValidation(UUID eventId) {
+        SingleEvent singleEvent = singleEventsRepository
+                .findById(eventId)
+                .orElseThrow(() -> new NotFoundException("Нет события, с переданным id", "Нет данных"));
+
+        if (!ownerValidation(singleEvent)) {
+            throw new ConflictException("Запись не пренедлежит пользователю", "Конфликт");
+        }
     }
 }

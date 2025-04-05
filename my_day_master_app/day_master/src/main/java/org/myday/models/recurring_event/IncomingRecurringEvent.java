@@ -14,6 +14,7 @@ public class IncomingRecurringEvent {
 
     private String title;
     private String rrule;
+    private Boolean isDeleted;
     private String timeZone;
     private Instant startTime;
     private Instant endTime;

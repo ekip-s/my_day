@@ -26,7 +26,7 @@ public class EventsExceptionsController {
     @PostMapping("/{eventId}")
     public void addEventException(
             @PathVariable @Parameter(description = "id события", required = true) UUID eventId,
-            @RequestParam @Parameter(description = "Дата/время исключения?", required = true) Instant exceptionTime
+            @RequestParam @Parameter(description = "Дата/время исключения", required = true) Instant exceptionTime
     ) {
         log.info("POST: EventsExceptionsController addEventException, eventId: {}, exceptionTime: {}",
                 eventId, exceptionTime);

@@ -53,7 +53,7 @@ public class RecurringEventsController {
     @Operation(
             summary = "Изменение события"
     )
-    @PutMapping
+    @PutMapping("/{eventId}")
     public OutgoingRecurringEvent updateRecurringEvent(
             @PathVariable @Parameter(description = "id события", required = true) UUID eventId,
             @RequestBody IncomingRecurringEvent incomingRecurringEvent) {
